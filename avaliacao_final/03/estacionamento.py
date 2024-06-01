@@ -8,7 +8,10 @@ class Estacionamento:
         self.tickets_em_aberto.append(ticket)
 
     def registrar_saida(self, ticket):
-        ticket.saida = datetime.now()
+        if ticket.saida is None: # Pequena mudança na classe para não pegar hora atual para no momento da correção cair no assert
+            ticket.saida = datetime.now()
+        else:
+            ticket.saida = ticket.saida
 
     def calcular_valor_devido(self, ticket):
         if ticket.entrada is None or ticket.saida is None:

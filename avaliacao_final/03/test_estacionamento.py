@@ -26,14 +26,15 @@ def test_calcular_valor_devido(estacionamento):
     placa = "XYZ-5678"
     modelo = "SUV"
     entrada = datetime(2024, 5, 30, 14, 0)  # Entrada às 14:00
+    saida = datetime(2024, 5, 30, 16, 0)  # Entrada às 16:00
     
     # When
-    ticket = Ticket(placa, modelo, entrada=entrada)
+    ticket = Ticket(placa, modelo, entrada=entrada, saida=saida)
     estacionamento.registrar_saida(ticket)
     valor_devido = estacionamento.calcular_valor_devido(ticket)
     
     # Then
-    assert valor_devido == 15  # R$ 15 para a primeira hora + R$ 5 para a segunda hora
+    assert valor_devido == 20  # R$ 15 para a primeira hora + R$ 5 para a segunda hora
 
 if __name__ == "__main__":
     pytest.main()
